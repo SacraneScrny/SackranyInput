@@ -1,0 +1,19 @@
+{
+    "name": "Sackrany.Input",
+    "rootNamespace": "Sackrany.GameInput",
+    "references": [
+        "Sackrany.Config",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

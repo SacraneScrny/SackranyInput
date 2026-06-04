@@ -1,0 +1,10 @@
+﻿using Sackrany.ConfigSystem.SackranyConfig;
+
+namespace Sackrany.GameInput.SackranyInput.Configurations
+{
+    public class GameInputConfigs : IDynamicConfig
+    {
+        public float MouseSensitivity = 10f;
+        public bool InvertY = false;
+    }
+}
