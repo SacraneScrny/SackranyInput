@@ -61,6 +61,28 @@ namespace SackranyInput
         public static T Get<T>() where T : InputActionsCache
             => (T)_caches[typeof(T)];
 
+        public static bool TryGet<T>(out T cache) where T : InputActionsCache
+        {
+            if (_caches.TryGetValue(typeof(T), out var disposable))
+            {
+                cache = (T)disposable;
+                return true;
+            }
+
+            cache = null;
+            return false;
+        }
+
+        public static Vector2 ApplyLookSettings(Vector2 look)
+        {
+            var cfg = InputConfigs;
+            if (cfg == null) return look;
+
+            look *= cfg.MouseSensitivity;
+            if (cfg.InvertY) look.y = -look.y;
+            return look;
+        }
+
         public static void ApplySettings()
         {
             foreach (var binding in _bindings)
