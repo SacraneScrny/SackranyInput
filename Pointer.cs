@@ -56,7 +56,7 @@ namespace SackranyInput
         public void SwitchCursorVisibility(bool visible)
         {
             Cursor.visible = visible;
-            Cursor.lockState = visible ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 }
