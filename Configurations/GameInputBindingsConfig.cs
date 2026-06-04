@@ -1,4 +1,4 @@
-﻿using Sackrany.ConfigSystem.SackranyConfig;
+﻿using SackranyConfig;
 
 namespace SackranyInput.Configurations
 {

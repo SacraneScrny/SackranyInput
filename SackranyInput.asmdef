@@ -2,10 +2,10 @@
     "name": "SackranyInput",
     "rootNamespace": "SackranyInput",
     "references": [
-        "Sackrany.Config",
         "Unity.InputSystem",
         "UnityEngine.UI",
-        "UniTask"
+        "UniTask",
+        "SackranyConfig"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

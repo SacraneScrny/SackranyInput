@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-using Sackrany.ConfigSystem.SackranyConfig;
+using SackranyConfig;
 
 using SackranyInput.Caches;
 using SackranyInput.Configurations;
