@@ -1,6 +1,6 @@
 ﻿using Sackrany.ConfigSystem.SackranyConfig;
 
-namespace Sackrany.GameInput.SackranyInput.Configurations
+namespace SackranyInput.Configurations
 {
     public class GameInputConfigs : IDynamicConfig
     {

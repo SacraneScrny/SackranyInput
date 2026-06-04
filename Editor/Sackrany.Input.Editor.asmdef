@@ -1,6 +1,6 @@
 {
-    "name": "Sackrany.Input.Editor",
-    "rootNamespace": "Sackrany.GameInput.Editor",
+    "name": "SackranyInput.Input.Editor",
+    "rootNamespace": "SackranyInput.Editor",
     "references": [
         "Sackrany.Input",
         "Unity.InputSystem"

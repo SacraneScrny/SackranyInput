@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Sackrany.GameInput.Editor.SackranyInput.Editor
+namespace SackranyInput.Editor
 {
     public class InputManagerGeneratorWindow : EditorWindow
     {
@@ -91,10 +91,7 @@ namespace Sackrany.GameInput.Editor.SackranyInput.Editor
             AssetDatabase.Refresh();
             Debug.Log($"[InputManagerGenerator] Generated {mapInfos.Count} caches + GameControls binding. Scheme: {schemeName}");
         }
-
-        // Генерёнка живёт в отдельной сборке, ссылающейся на руками написанный
-        // Sackrany.Input. Так asmdef фичи не ломается, а partial-классов между
-        // сборками не возникает.
+        
         static void EnsureAsmdef()
         {
             var path = Path.Combine(OutputDir, "Sackrany.Input.Generated.asmdef");
@@ -133,8 +130,10 @@ namespace Sackrany.GameInput.Editor.SackranyInput.Editor
             sb.AppendLine("using Cysharp.Threading.Tasks;");
             sb.AppendLine();
             sb.AppendLine("using UnityEngine;");
+            sb.AppendLine("using SackranyInput.SackranyInput;");
+            sb.AppendLine("using SackranyInput.SackranyInput.Caches;");
             sb.AppendLine();
-            sb.AppendLine("namespace Sackrany.GameInput.Caches");
+            sb.AppendLine("namespace SackranyInput.Caches");
             sb.AppendLine("{");
             sb.AppendLine($"    public class {map.CacheName} : InputActionsCache");
             sb.AppendLine("    {");
@@ -208,8 +207,8 @@ namespace Sackrany.GameInput.Editor.SackranyInput.Editor
             sb.AppendLine("// AUTO-GENERATED — do not edit manually");
             sb.AppendLine("using System.Threading;");
             sb.AppendLine();
-            sb.AppendLine("using Sackrany.GameInput;");
-            sb.AppendLine("using Sackrany.GameInput.Caches;");
+            sb.AppendLine("using SackranyInput;");
+            sb.AppendLine("using SackranyInput.Caches;");
             sb.AppendLine();
             sb.AppendLine("using UnityEngine;");
             sb.AppendLine();

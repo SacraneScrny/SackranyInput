@@ -4,7 +4,8 @@ using System.Threading;
 
 using Sackrany.ConfigSystem.SackranyConfig;
 using Sackrany.GameInput.SackranyInput.Caches;
-using Sackrany.GameInput.SackranyInput.Configurations;
+
+using SackranyInput.Configurations;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
