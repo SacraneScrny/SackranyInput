@@ -1,13 +1,13 @@
 {
-    "name": "SackranyInput.Input.Editor",
-    "rootNamespace": "SackranyInput.Editor",
+    "name": "SackranyInput",
+    "rootNamespace": "SackranyInput",
     "references": [
-        "Sackrany.Input",
-        "Unity.InputSystem"
+        "Sackrany.Config",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "UniTask"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -1,4 +1,4 @@
-# Sackrany.Input
+# SackranyInput
 
 Обёртка над Unity Input System: типобезопасные кэши действий, указатель (`Pointer`),
 оверрайды бинда через `ConfigSystem`.
@@ -10,7 +10,7 @@
 3. Генерится в `Assets/_Generated/GameInput/`:
    - кэши действий (`*ActionsCache`),
    - класс `GameControls : IInputBinding`,
-   - `Sackrany.Input.Generated.asmdef` (ссылается на `Sackrany.Input`).
+   - `SackranyInput.Generated.asmdef` (ссылается на `SackranyInput`).
 
 `GameControls` сам регистрируется в `InputManager` на старте — никаких `partial`-классов
 между сборками. Ручной `InputManager` компилируется даже без генерёнки.
@@ -25,4 +25,4 @@ var aim = InputManager.CurrentPointer.WorldRay;
 (JSON оверрайдов). Сохранение бинда — `InputManager.SaveBindingOverrides(asset)`.
 
 **Зависимости:** `Sackrany.Config`, Input System, UniTask, UnityEngine.UI.
-**Editor:** генератор `Sackrany.Input.Editor`.
+**Editor:** генератор `SackranyInput.Editor`.
