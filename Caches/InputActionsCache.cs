@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine.InputSystem;
 
-namespace Sackrany.GameInput.SackranyInput.Caches
+namespace SackranyInput.Caches
 {
     public abstract class InputActionsCache : IDisposable
     {

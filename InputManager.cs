@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.Threading;
 
 using Sackrany.ConfigSystem.SackranyConfig;
-using Sackrany.GameInput.SackranyInput.Caches;
 
+using SackranyInput.Caches;
 using SackranyInput.Configurations;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Sackrany.GameInput.SackranyInput
+namespace SackranyInput
 {
-    /// <summary>
-    /// Ручной рантайм ввода: жизненный цикл, кэши, указатель, оверрайды бинда.
-    /// Не зависит от сгенерированного кода — сгенерированная схема подключается
-    /// через <see cref="IInputBinding"/> и <see cref="RegisterBinding"/>.
-    /// </summary>
     public static class InputManager
     {
         static CancellationTokenSource _cancellation;
@@ -29,16 +24,11 @@ namespace Sackrany.GameInput.SackranyInput
 
         public static CancellationToken Token => _cancellation?.Token ?? CancellationToken.None;
 
-        /// <summary>
-        /// Регистрирует сгенерированную схему ввода. Вызывается из генерёнки в
-        /// [RuntimeInitializeOnLoadMethod(BeforeSceneLoad)] — то есть до <see cref="Init"/>.
-        /// </summary>
         public static void RegisterBinding(IInputBinding binding)
         {
             if (binding == null || _bindings.Contains(binding)) return;
             _bindings.Add(binding);
 
-            // Если Init уже прошёл (горячая регистрация) — догоняем биндинг.
             if (_cancellation != null)
             {
                 binding.Init(_cancellation.Token);
@@ -77,7 +67,6 @@ namespace Sackrany.GameInput.SackranyInput
                 binding.ApplySettings();
         }
 
-        /// <summary>Грузит оверрайды бинда из конфига в asset схемы. Зовётся биндингом.</summary>
         public static void ApplyBindingOverrides(InputActionAsset asset)
         {
             var cfg = ConfigGet<GameInputBindingsConfig>.Value;
@@ -87,7 +76,6 @@ namespace Sackrany.GameInput.SackranyInput
             asset.LoadBindingOverridesFromJson(cfg.BindingOverridesJson);
         }
 
-        /// <summary>Сохраняет текущие оверрайды бинда из asset в конфиг (для UI настроек).</summary>
         public static void SaveBindingOverrides(InputActionAsset asset)
         {
             ConfigSet<GameInputBindingsConfig>.Do(c => c.BindingOverridesJson = asset.SaveBindingOverridesAsJson());

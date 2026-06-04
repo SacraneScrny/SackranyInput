@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace Sackrany.GameInput.SackranyInput
+namespace SackranyInput
 {
     public class Pointer
     {

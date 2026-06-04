@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine.InputSystem;
 
-namespace Sackrany.GameInput.SackranyInput
+namespace SackranyInput
 {
     public class ActionBind
     {

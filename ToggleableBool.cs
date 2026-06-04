@@ -1,4 +1,4 @@
-namespace Sackrany.GameInput.SackranyInput
+namespace SackranyInput
 {
     public class ToggleableBool
     {

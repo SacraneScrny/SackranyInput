@@ -52,7 +52,7 @@ namespace SackranyInput.Editor
 
             if (_asset == null)
             {
-                EditorGUILayout.HelpBox("Выбери InputActionAsset для генерации.", MessageType.Info);
+                EditorGUILayout.HelpBox("Select an InputActionAsset to generate.", MessageType.Info);
                 return;
             }
 
@@ -94,15 +94,15 @@ namespace SackranyInput.Editor
         
         static void EnsureAsmdef()
         {
-            var path = Path.Combine(OutputDir, "Sackrany.Input.Generated.asmdef");
+            var path = Path.Combine(OutputDir, "SackranyInput.Generated.asmdef");
             if (File.Exists(path)) return;
 
             const string json =
 @"{
-    ""name"": ""Sackrany.Input.Generated"",
+    ""name"": ""SackranyInput.Generated"",
     ""rootNamespace"": """",
     ""references"": [
-        ""Sackrany.Input"",
+        ""SackranyInput"",
         ""Unity.InputSystem"",
         ""UniTask""
     ],
@@ -119,8 +119,6 @@ namespace SackranyInput.Editor
             File.WriteAllText(path, json);
         }
 
-        // ── Cache file ──────────────────────────────────────────────────────
-
         static void GenerateCacheFile(MapInfo map, string schemeName)
         {
             var sb = new StringBuilder();
@@ -130,8 +128,7 @@ namespace SackranyInput.Editor
             sb.AppendLine("using Cysharp.Threading.Tasks;");
             sb.AppendLine();
             sb.AppendLine("using UnityEngine;");
-            sb.AppendLine("using SackranyInput.SackranyInput;");
-            sb.AppendLine("using SackranyInput.SackranyInput.Caches;");
+            sb.AppendLine("using SackranyInput;");
             sb.AppendLine();
             sb.AppendLine("namespace SackranyInput.Caches");
             sb.AppendLine("{");
@@ -196,15 +193,12 @@ namespace SackranyInput.Editor
             File.WriteAllText(Path.Combine(OutputDir, $"{map.CacheName}.cs"), sb.ToString());
         }
 
-        // ── Binding (реестр вместо partial) ─────────────────────────────────
-
         static string MapField(MapInfo map) => char.ToLower(map.MapName[0]) + map.MapName.Substring(1);
 
         static void GenerateBindingFile(List<MapInfo> maps, string schemeName)
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("// AUTO-GENERATED — do not edit manually");
             sb.AppendLine("using System.Threading;");
             sb.AppendLine();
             sb.AppendLine("using SackranyInput;");
@@ -212,10 +206,6 @@ namespace SackranyInput.Editor
             sb.AppendLine();
             sb.AppendLine("using UnityEngine;");
             sb.AppendLine();
-            sb.AppendLine("/// <summary>");
-            sb.AppendLine("/// Сгенерированная схема ввода. Сама регистрируется в InputManager на старте.");
-            sb.AppendLine("/// Доступ: GameControls.PlayerCache.Jump, GameControls.EnablePlayer() и т.д.");
-            sb.AppendLine("/// </summary>");
             sb.AppendLine("public sealed class GameControls : IInputBinding");
             sb.AppendLine("{");
             sb.AppendLine("    public static GameControls Instance { get; private set; }");
@@ -230,7 +220,6 @@ namespace SackranyInput.Editor
             sb.AppendLine($"    {schemeName} _inputScheme;");
             sb.AppendLine();
 
-            // Action map fields + static shortcuts
             foreach (var map in maps)
             {
                 var field = MapField(map);
@@ -239,7 +228,6 @@ namespace SackranyInput.Editor
                 sb.AppendLine();
             }
 
-            // Cache fields + static shortcuts
             foreach (var map in maps)
             {
                 sb.AppendLine($"    {map.CacheName} _{map.CacheFieldName};");
@@ -247,7 +235,6 @@ namespace SackranyInput.Editor
                 sb.AppendLine();
             }
 
-            // Enable helpers
             foreach (var map in maps)
             {
                 sb.AppendLine($"    public static void Enable{map.MapName}()");
@@ -264,7 +251,6 @@ namespace SackranyInput.Editor
                 sb.AppendLine();
             }
 
-            // Init
             sb.AppendLine("    public void Init(CancellationToken token)");
             sb.AppendLine("    {");
             sb.AppendLine($"        _inputScheme = new {schemeName}();");
@@ -281,7 +267,6 @@ namespace SackranyInput.Editor
             sb.AppendLine("    }");
             sb.AppendLine();
 
-            // Dispose
             sb.AppendLine("    public void Dispose()");
             sb.AppendLine("    {");
             foreach (var map in maps)
@@ -292,7 +277,6 @@ namespace SackranyInput.Editor
             sb.AppendLine("    }");
             sb.AppendLine();
 
-            // ApplySettings
             sb.AppendLine("    public void ApplySettings()");
             sb.AppendLine("    {");
             sb.AppendLine("        if (_inputScheme != null)");
@@ -302,8 +286,6 @@ namespace SackranyInput.Editor
 
             File.WriteAllText(Path.Combine(OutputDir, "GameControls.cs"), sb.ToString());
         }
-
-        // ── Data ────────────────────────────────────────────────────────────
 
         static MapInfo BuildMapInfo(InputActionMap map)
         {
@@ -357,8 +339,6 @@ namespace SackranyInput.Editor
             "Quaternion" => "UnityEngine.Quaternion",
             _ => "float"
         };
-
-        // ── Models ──────────────────────────────────────────────────────────
 
         class MapInfo
         {
