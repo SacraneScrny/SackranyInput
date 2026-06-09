@@ -210,7 +210,7 @@ namespace SackranyInput.Editor
             sb.AppendLine("{");
             sb.AppendLine("    public static GameControls Instance { get; private set; }");
             sb.AppendLine();
-            sb.AppendLine("    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]");
+            sb.AppendLine("    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]");
             sb.AppendLine("    static void Register()");
             sb.AppendLine("    {");
             sb.AppendLine("        Instance ??= new GameControls();");
